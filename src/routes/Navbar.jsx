@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaSignInAlt, FaUser } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { FaSignInAlt } from "react-icons/fa";
 import { Avatar, IconButton, Menu } from "@mui/material";
 import { blue } from "@mui/material/colors";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  // const userData = { name: "Faraan", email: "faraan@gmail.com" };
-  const userData = null;
+  const token = localStorage.getItem("authToken");
+  const userData = { name: "eve", email: " eve.holt@reqres.in" };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -17,22 +17,26 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const remove = () => {};
-
-  // const remove = () => {
-  //   dispatch(removeUser());
-  //   navigate("/login");
-  //   toast.success("Logged out Successfully");
-  //   handleClose();
-  // };
+  const navigate = useNavigate();
+  const remove = () => {
+    localStorage.removeItem("authToken");
+    navigate("/login");
+    toast.success("Logged out Successfully");
+    handleClose();
+  };
 
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body" data-bs-theme="dark">
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand" style={{ fontSize: "32px" }}>
+          <Link
+            to={token ? "/users" : "/login"}
+            className="navbar-brand"
+            style={{ fontSize: "32px" }}
+          >
             User Management App
           </Link>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -46,7 +50,7 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav d-flex justify-content-end align-items-center gap-3 w-100">
-              {userData !== null ? (
+              {token !== null ? (
                 <li
                   className="nav-item dropstart"
                   style={{ marginRight: "10px", fontSize: "18px" }}

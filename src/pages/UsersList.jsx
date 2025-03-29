@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const USERS_PER_PAGE = 4;
@@ -44,6 +45,7 @@ const UsersList = () => {
     try {
       await axios.delete(`${BASE_URL}/api/users/${id}`);
       setUsers(users.filter((user) => user.id !== id));
+      toast.error("user deleted");
     } catch (error) {
       console.error("Error deleting user:", error);
     }

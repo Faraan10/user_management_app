@@ -32,7 +32,6 @@ const EditUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate avatar URL
     if (
       !user.avatar.match(/^https?:\/\/.*\/.*\.(png|webp|jpeg|jpg)\??.*$/gim)
     ) {
@@ -43,9 +42,8 @@ const EditUser = () => {
     try {
       await axios.put(`${BASE_URL}/api/users/${id}`, user);
 
-      // ✅ Update local state instead of refetching mock API
       toast.success("User updated successfully");
-      navigate("/", { state: { updatedUser: user } }); // Pass updated data back
+      navigate("/", { state: { updatedUser: user } });
     } catch (error) {
       console.error("Error updating user:", error);
       toast.error("Failed to update user");
