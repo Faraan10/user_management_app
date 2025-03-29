@@ -4,7 +4,9 @@
 }
 
 body {
-  background-color: #f9f3f3;
+  /* background-color: #f9f3f3; */
+  font-family: monospace;
+  background-color: #f4f6f8;
   background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
 }
 
@@ -12,7 +14,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
+  min-height: 100vh;
 }
 
 .wrapper {
@@ -61,4 +63,189 @@ i {
   outline: none;
   border-radius: 3px;
   padding: 3px 0px 3px 0px;
+}
+
+/* Users List CSS */
+
+/* General Reset and Box Sizing */
+
+/* Body Styles */
+body {
+}
+
+/* Container for the Table */
+.task-container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 5% auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.task-container h2 {
+  font-size: 24px;
+  text-align: center;
+  margin: 2% 0% 3% 0%;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* Table Styles */
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.task-table th,
+.task-table td {
+  padding: 1rem;
+  text-align: left;
+  padding: 15px;
+}
+
+.task-table th {
+  background-color: #565e68;
+  color: #ffffff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.task-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.task-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Status Dropdown */
+.status-dropdown {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+}
+
+.status-dropdown:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Table Headers */
+.task-table th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Title Column */
+.title-cell {
+  font-weight: 600;
+}
+
+.action-button-1 {
+  margin: 10px;
+  height: 35px;
+  width: 70px;
+  background-color: yellow;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .task-container {
+    padding: 1rem;
+  }
+
+  .task-table th,
+  .task-table td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .status-dropdown {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .task-container {
+    padding: 0.5rem;
+  }
+
+  .task-table th,
+  .task-table td {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .status-dropdown {
+    padding: 0.4rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+/* Button Styles */
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+/* Pagination buttons syles */
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* Space between elements */
+  margin-top: 20px;
+  flex-wrap: wrap; /* Ensures wrapping if needed */
+}
+
+.page-indicator {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .pagination-wrapper {
+    flex-direction: column; /* Stack on small screens */
+    gap: 8px;
+  }
+
+  .btn {
+    width: 100px; /* Slightly bigger buttons for touch */
+  }
+}
+
+.note_container {
+  background-color: white;
+  margin: 2% 13% 0% 13%;
+  width: 70%;
+  border-radius: 3px;
 }

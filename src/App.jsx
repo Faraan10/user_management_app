@@ -2,20 +2,19 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import EditUsers from "./pages/EditUsers";
 import UsersList from "./pages/UsersList";
-import Direct from "./routes/Routes";
+import Navbar from "./routes/Navbar";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 import "./App.css";
 
 const App = () => {
-  console.log(BASE_URL);
+  // console.log(BASE_URL);
 
   const token = "49494949";
 
   return (
     <>
-      <h1>App file</h1>
       <BrowserRouter>
-        <Direct />
+        <Navbar />
         <Routes>
           <Route
             path="/"
