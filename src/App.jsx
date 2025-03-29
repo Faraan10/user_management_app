@@ -8,6 +8,7 @@ import "./App.css";
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("authToken"));
+  console.log(token);
 
   useEffect(() => {
     setToken(localStorage.getItem("authToken"));

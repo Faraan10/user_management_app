@@ -34,12 +34,7 @@ const Navbar = () => {
             className="navbar-brand"
             style={{ fontSize: "32px" }}
           >
-            <img
-              src="./public/tt.png"
-              height="50px"
-              width="50px"
-              alt="app-logo"
-            />
+            <img src="/tt.png" height="50px" width="50px" alt="app-logo" />
           </Link>
 
           <button
