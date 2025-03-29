@@ -1,12 +1,36 @@
-# React + Vite
+Users Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based user management application that allows users to be viewed, edit, delete, searched, and paginated. It fetches data from an API and supports real-time searching.
 
-Currently, two official plugins are available:
+Features
+1) Fetches users from an API  
+2) Implements search functionality across all pages
+3) Supports pagination
+4) User Authentication** (Login & Protected Routes)
+5) JWT Token Storage in localStorage
+6) React Router for Navigation**
+7) Allows user deletion and updation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+Installation & Setup
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone the Repository
+   
+   git clone https://github.com/Faraan10/user_management_app.git
+
+   cd user_management_app
+   
+
+3. Install dependencies
+   
+    npm install
+   
+
+5. Setup Envirnoment variables
+   
+    VITE_BASE_URL=YOUR_API_BASE_URL
+   
+
+7. Run the Application
+   
+    npm run dev
