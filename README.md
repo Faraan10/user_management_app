@@ -26,7 +26,7 @@ Installation & Setup
     npm install
    
 
-5. Setup Envirnoment variables
+5. Setup Envirnoment variables  ( .env )
    
     VITE_BASE_URL=YOUR_API_BASE_URL
    
