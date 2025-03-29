@@ -9,23 +9,47 @@ const USERS_PER_PAGE = 4;
 const UsersList = () => {
   const location = useLocation();
   const [users, setUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const getData = async (page) => {
+  const fetchAllUsers = async () => {
+    try {
+      let allData = [];
+      let page = 1;
+      let totalUsers = 0;
+
+      do {
+        const response = await axios.get(
+          `${BASE_URL}/api/users?page=${page}&per_page=${USERS_PER_PAGE}`
+        );
+        allData = [...allData, ...response.data.data];
+        totalUsers = response.data.total;
+        page++;
+      } while (allData.length < totalUsers);
+      setAllUsers(allData);
+    } catch (error) {
+      console.error("Error fetching all users:", error);
+    }
+  };
+
+  const fetchPaginatedUsers = async (page) => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/api/users?page=${page}/&per_page=${USERS_PER_PAGE}`
+        `${BASE_URL}/api/users?page=${page}&per_page=${USERS_PER_PAGE}`
       );
       setUsers(response.data.data);
-      setTotalPages(Math.ceil(response.data.total / 4));
+      setTotalPages(Math.ceil(response.data.total / USERS_PER_PAGE));
     } catch (error) {
       console.error("Error fetching users:", error);
     }
   };
 
   useEffect(() => {
-    getData(currentPage);
+    fetchAllUsers();
+    fetchPaginatedUsers(currentPage);
   }, [currentPage]);
 
   useEffect(() => {
@@ -40,21 +64,42 @@ const UsersList = () => {
     }
   }, [location.state?.updatedUser]);
 
-  // Delete user
   const deleteUser = async (id) => {
     try {
       await axios.delete(`${BASE_URL}/api/users/${id}`);
+      setAllUsers(allUsers.filter((user) => user.id !== id));
       setUsers(users.filter((user) => user.id !== id));
-      toast.error("user deleted");
+      setFilteredUsers(filteredUsers.filter((user) => user.id !== id));
+      toast.error("User deleted");
     } catch (error) {
       console.error("Error deleting user:", error);
     }
   };
 
+  useEffect(() => {
+    if (searchQuery.trim() === "") {
+      setFilteredUsers(users);
+    } else {
+      const searchedUsers = allUsers.filter((user) =>
+        user.first_name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredUsers(searchedUsers);
+    }
+  }, [searchQuery, users, allUsers]);
+
   return (
     <>
       <div className="task-container">
         <h2>The Users are Listed Below</h2>
+
+        <input
+          type="text"
+          placeholder="Search by first name..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input"
+        />
+
         <table className="task-table">
           <thead>
             <tr>
@@ -67,45 +112,44 @@ const UsersList = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.email}</td>
-                <td>{user.first_name}</td>
-                <td>{user.last_name}</td>
-                <td>
-                  <img
-                    src={user.avatar}
-                    alt={user.first_name}
-                    className="avatar"
-                  />
-                </td>
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Link to={`/edit/${user.id}`} state={{ user }}>
-                    <button className="btn btn-warning">Edit</button>
-                  </Link>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => deleteUser(user.id)}
-                  >
-                    Delete
-                  </button>
+            {filteredUsers.length > 0 ? (
+              filteredUsers.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.id}</td>
+                  <td>{user.email}</td>
+                  <td>{user.first_name}</td>
+                  <td>{user.last_name}</td>
+                  <td>
+                    <img
+                      src={user.avatar}
+                      alt={user.first_name}
+                      className="avatar"
+                    />
+                  </td>
+                  <td>
+                    <Link to={`/edit/${user.id}`} state={{ user }}>
+                      <button className="btn btn-warning">Edit</button>
+                    </Link>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => deleteUser(user.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center" }}>
+                  No users found
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
 
-      {/* Pagination Controls */}
       <div className="pagination-wrapper">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

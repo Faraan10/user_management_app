@@ -34,7 +34,12 @@ const Navbar = () => {
             className="navbar-brand"
             style={{ fontSize: "32px" }}
           >
-            User Management App
+            <img
+              src="./public/tt.png"
+              height="50px"
+              width="50px"
+              alt="app-logo"
+            />
           </Link>
 
           <button
