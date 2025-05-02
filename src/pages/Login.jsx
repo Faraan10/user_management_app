@@ -19,16 +19,21 @@ const Login = ({ setToken }) => {
     }
 
     try {
-      const response = await axios.post(`${BASE_URL}/api/login`, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${BASE_URL}/api/login`,
+        { email, password },
+        {
+          headers: {
+            "x-api-key": "reqres-free-v1",
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.data.token) {
-        localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("authToken", response.data.token); // fixed: store token only
         setToken(response.data.token);
         toast.success("Login successful!");
-
         navigate("/users");
       } else {
         toast.error("Invalid credentials");

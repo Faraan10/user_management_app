@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const token = localStorage.getItem("authToken");
-  const userData = { name: "eve", email: " eve.holt@reqres.in" };
+  const userData = { name: "eve", email: "eve.holt@reqres.in" };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
