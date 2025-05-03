@@ -6,6 +6,7 @@ import UsersList from "./pages/UsersList";
 import NotFound from "./pages/NotFound";
 import Navbar from "./routes/Navbar";
 import "./App.css";
+import Register from "./pages/Register";
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("authToken"));
@@ -30,6 +31,8 @@ const App = () => {
           }
         />
         <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/register" element={<Register />} />
+
         <Route
           path="/edit/:id"
           element={token ? <EditUsers /> : <Navigate to="/login" replace />}
