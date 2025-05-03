@@ -33,6 +33,7 @@ const App = () => {
         />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
         <Route
           path="/edit/:id"
