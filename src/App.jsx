@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Login from "./pages/Login";
 import EditUsers from "./pages/EditUsers";
 import UsersList from "./pages/UsersList";
+import NotFound from "./pages/NotFound";
 import Navbar from "./routes/Navbar";
 import "./App.css";
 
@@ -37,16 +38,7 @@ const App = () => {
           path="/users"
           element={token ? <UsersList /> : <Navigate to="/login" replace />}
         />
-        <Route
-          path="*"
-          element={
-            token ? (
-              <Navigate to="/users" replace />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
